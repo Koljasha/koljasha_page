@@ -1,2 +1,1 @@
-# koljasha
-Simple HTML page for server
+### Simple HTML page for server [koljasha.ru](https://koljasha.ru)
