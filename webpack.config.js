@@ -15,86 +15,90 @@ const imageminMozjpeg = require('imagemin-mozjpeg');
 
 const eslintFriendlyFormatter = require('eslint-friendly-formatter');
 
-const devMode = process.env.NODE_ENV !== 'production';
+module.exports = (env, options) => {
+    const devMode = options.mode !== 'production';
 
-module.exports = {
-    entry: {
-        index: './src/script.js'
-    },
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: '[name].js'
-    },
-
-    optimization: {
-        minimizer: [
-            new UglifyJsPlugin({}),
-            new OptimizeCSSAssetsPlugin({})
-        ]
-    },
-
-    plugins: [
-        new CleanWebpackPlugin(['dist']),
-        new MiniCssExtractPlugin({}),
-        new HtmlWebpackPlugin({
-            template: './src/index.html',
-            minify: devMode ? false : {
-                removeComments: true,
-                collapseWhitespace: true,
-                conservativeCollapse: true
-            }
-        }),
-        new CopyWebpackPlugin([
-            { from: 'src/img/', to: 'img/' }
-        ]),
-        new ImageminPlugin({
-            disable: devMode,
-            test: /\.(jpe?g|png)$/i,
-            optipng: {
-                optimizationLevel: 7
-            },
-            plugins: [
-                imageminMozjpeg({
-                    quality: 90,
-                    progressive: true
-                })
-            ]
-        })
-    ],
-    module: {
-        rules: [{
-            test: /\.js$/,
-            enforce: 'pre',
-            exclude: /node_modules/,
-            options: {
-                formatter: eslintFriendlyFormatter,
-                emitWarning: false
-            },
-            loader: 'eslint-loader'
+    const config = {
+        entry: {
+            index: './src/script.js'
         },
-        {
-            test: /\.js$/,
-            exclude: /node_modules/,
-            use: {
-                loader: 'babel-loader'
-            }
+        output: {
+            path: path.resolve(__dirname, 'dist'),
+            filename: '[name].js'
         },
-        {
-            test: /\.css$/,
-            use: [
-                devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-                'css-loader'
+
+        optimization: {
+            minimizer: [
+                new UglifyJsPlugin({}),
+                new OptimizeCSSAssetsPlugin({})
             ]
         },
-        {
-            test: /\.(jpg|png)$/,
-            use: [{
-                loader: 'file-loader',
-                options: {
-                    name: 'img/[name].[ext]'
+
+        plugins: [
+            new CleanWebpackPlugin(['dist']),
+            new MiniCssExtractPlugin({}),
+            new HtmlWebpackPlugin({
+                template: './src/index.html',
+                minify: devMode ? false : {
+                    removeComments: true,
+                    collapseWhitespace: true,
+                    conservativeCollapse: true
                 }
-            }]
+            }),
+            new CopyWebpackPlugin([
+                { from: 'src/img/', to: 'img/' }
+            ]),
+            new ImageminPlugin({
+                disable: devMode,
+                test: /\.(jpe?g|png)$/i,
+                optipng: {
+                    optimizationLevel: 7
+                },
+                plugins: [
+                    imageminMozjpeg({
+                        quality: 90,
+                        progressive: true
+                    })
+                ]
+            })
+        ],
+        module: {
+            rules: [{
+                test: /\.js$/,
+                enforce: 'pre',
+                exclude: /node_modules/,
+                options: {
+                    formatter: eslintFriendlyFormatter,
+                    emitWarning: false
+                },
+                loader: 'eslint-loader'
+            },
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader'
+                }
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+                    'css-loader'
+                ]
+            },
+            {
+                test: /\.(jpg|png)$/,
+                use: [{
+                    loader: 'file-loader',
+                    options: {
+                        name: 'img/[name].[ext]'
+                    }
+                }]
+            }
+            ]
         }
-        ]
-    }
+    };
+
+    return config;
 };
