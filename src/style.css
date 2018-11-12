@@ -1,18 +1,10 @@
-html {
+body {
     font-family: Noto Serif;
     font-size: 36px;
 }
 
 p {
     margin-bottom: 0;
-}
-
-.part p {
-    margin: .5rem 0 0 .75rem;
-}
-
-.part:hover{
-    cursor: pointer;
 }
 
 .container-fluid {
@@ -31,8 +23,20 @@ overflow: hidden;
     color: rgb(228,228,228);
 }
 
+.part {
+  width: 100%;
+}
+
+.part p {
+    margin: .5rem 0 0 .75rem;
+}
+
+.part:hover{
+    cursor: pointer;
+}
+
 .copyright {
-    font-size: .5rem;
+    font-size: 18px;
     height: 6vh;
     background-color: rgb(20,20,20);
     color: rgb(228,228,228);
