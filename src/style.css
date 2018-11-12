@@ -1,17 +1,17 @@
-body {
+html {
     font-family: Noto Serif;
-    font-size: 2rem;
+    font-size: 36px;
 }
 
 p {
     margin-bottom: 0;
 }
 
-.col- p {
-    margin-left: .75rem;
+.part p {
+    margin: .5rem 0 0 .75rem;
 }
 
-.col-:hover{
+.part:hover{
     cursor: pointer;
 }
 
@@ -32,7 +32,7 @@ overflow: hidden;
 }
 
 .copyright {
-    font-size: 1rem;
+    font-size: .5rem;
     height: 6vh;
     background-color: rgb(20,20,20);
     color: rgb(228,228,228);
