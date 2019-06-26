@@ -10,8 +10,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ImageminPlugin = require('imagemin-webpack-plugin').default;
-const imageminMozjpeg = require('imagemin-mozjpeg');
+//const ImageminPlugin = require('imagemin-webpack-plugin').default;
+//const imageminMozjpeg = require('imagemin-mozjpeg');
 
 const eslintFriendlyFormatter = require('eslint-friendly-formatter');
 
@@ -47,20 +47,20 @@ module.exports = (env, options) => {
             }),
             new CopyWebpackPlugin([
                 { from: 'src/img/', to: 'img/' }
-            ]),
-            new ImageminPlugin({
-                disable: devMode,
-                test: /\.(jpe?g|png)$/i,
-                optipng: {
-                    optimizationLevel: 7
-                },
-                plugins: [
-                    imageminMozjpeg({
-                        quality: 90,
-                        progressive: true
-                    })
-                ]
-            })
+            ])
+            //new ImageminPlugin({
+            //    disable: devMode,
+            //    test: /\.(jpe?g|png)$/i,
+            //    optipng: {
+            //        optimizationLevel: 7
+            //    },
+            //    plugins: [
+            //        imageminMozjpeg({
+            //            quality: 90,
+            //            progressive: true
+            //        })
+            //    ]
+            //})
         ],
         module: {
             rules: [{

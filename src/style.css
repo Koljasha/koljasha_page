@@ -18,7 +18,8 @@ overflow: hidden;
 }
 
 .social {
-    height: 47vh;
+    /*height: 47vh;*/
+    height: 94vh;
     background-color: rgb(5,24,31);
     color: rgb(228,228,228);
 }
