@@ -19,4 +19,6 @@ window.onload = () => {
             window.open('https://social.koljasha.ru/', '_blank');
         });
     });
+
+    document.querySelector('#year').appendChild(document.createTextNode(new Date().getFullYear()));
 };
