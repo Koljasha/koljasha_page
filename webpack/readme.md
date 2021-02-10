@@ -1,1 +1,1 @@
-## this is only for example config *Webpack*
+## this folder is just an example **webpack** setup
