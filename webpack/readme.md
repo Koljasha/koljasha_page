@@ -1,2 +1,1 @@
-### this is old folder
-### only for example congig *Webpack*
+## this is only for example config *Webpack*
