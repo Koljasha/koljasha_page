@@ -12,7 +12,7 @@ window.onload = () => {
     const social = document.querySelectorAll('.social .part');
     social.forEach((element) => {
         element.addEventListener('click', () => {
-            window.open('https://social.koljasha.ru/', '_blank');
+            window.open('https://github.com/Koljasha/social', '_blank');
         });
     });
 
