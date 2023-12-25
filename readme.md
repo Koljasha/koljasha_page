@@ -1,1 +1,1 @@
-## Simple HTML page [koljasha.ru](https://koljasha.ru)
+## Simple HTML page [koljasha.ru](http://koljasha.ru)
