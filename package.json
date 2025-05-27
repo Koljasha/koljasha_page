@@ -1,0 +1,14 @@
+{
+  "name": "koljasha_page",
+  "version": "1.0.0",
+  "description": "Koljasha LP",
+  "scripts": {
+    "dev": "vite dev --open",
+    "build": "vite build --minify",
+    "preview": "vite preview --open"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}
+
