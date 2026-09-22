@@ -8,7 +8,7 @@
 
 - `npm install` — один раз, ставит зависимости.
 - `npm run dev` — разработка с HMR.
-- `npm run build` — сборка в `dist/` (в git не коммитится).
+- `npm run build` — сборка в `dist/` (коммитится: если на сервере нет node, деплой через `git pull`).
 - `npm run preview` или `python3 -m http.server -d dist` — просмотр сборки.
 - `src/index.html` — ИСХОДНИК-точка входа Vite, а `dist/` — собранный сайт (css/js с хешами + копии `public/`).
 - В корне — только конфиги (`vite.config.js`, `package.json`) и docs (`readme.md`, `deploy/`); исходники — в `src/`, статика — в `public/`.
