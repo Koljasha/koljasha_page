@@ -5,10 +5,10 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   root: 'src',
   base: './',
-  publicDir: resolve(__dirname, '../public'),
+  publicDir: resolve(import.meta.dirname, 'public'),
   plugins: [tailwindcss()],
   build: {
-    outDir: resolve(__dirname, '../dist'),
+    outDir: resolve(import.meta.dirname, 'dist'),
     emptyOutDir: true,
   },
 });
