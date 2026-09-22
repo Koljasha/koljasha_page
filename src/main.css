@@ -1,0 +1,245 @@
+@import "tailwindcss";
+
+@theme {
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--color-zinc-950);
+}
+
+::selection {
+  background-color: var(--color-emerald-400);
+  color: var(--color-zinc-950);
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rise-in {
+  animation: rise-in 0.6s ease-out both;
+}
+
+/* Spotlight-блик за курсором (переменные --mx/--my ставит main.js). */
+.spotlight-card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.spotlight-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  background: radial-gradient(
+    320px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(52, 211, 153, 0.12),
+    transparent 65%
+  );
+}
+
+.spotlight-card:hover::before,
+.spotlight-card:focus-visible::before {
+  opacity: 1;
+}
+
+.spotlight-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* H1: сдержанный градиент в палитре (zinc-50 -> emerald-200). */
+.h1-gradient {
+  background: linear-gradient(100deg, var(--color-zinc-50) 55%, var(--color-emerald-200) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Бейдж $ whoami: мягкое свечение-пульс. */
+@keyframes whoami-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 rgba(52, 211, 153, 0);
+  }
+  50% {
+    box-shadow: 0 0 18px rgba(52, 211, 153, 0.25);
+  }
+}
+
+.whoami-badge {
+  animation: whoami-glow 2.4s ease-in-out infinite;
+}
+
+.whoami-badge:hover,
+.whoami-badge:focus-visible {
+  animation-duration: 1.2s;
+  border-color: rgba(52, 211, 153, 0.6);
+  box-shadow: 0 0 22px rgba(52, 211, 153, 0.35);
+}
+
+/* Мигающий курсор после whoami. */
+@keyframes whoami-blink {
+  0%, 49% {
+    opacity: 1;
+  }
+  50%, 100% {
+    opacity: 0;
+  }
+}
+
+.whoami-cursor {
+  animation: whoami-blink 1.1s steps(1) infinite;
+}
+
+/* Строка-вывод $ whoami: плавное появление/гаснение, место в layout держит min-h в HTML. */
+.whoami-out {
+  transition: opacity 0.35s ease;
+}
+
+.whoami-out.is-visible {
+  opacity: 1;
+}
+
+.whoami-out-caret {
+  color: var(--color-emerald-400);
+  animation: whoami-blink 1.1s steps(1) infinite;
+}
+
+/* Shine-sweep: диагональная полоса, пробегающая по карточке на hover. */
+.spotlight-card::after {
+  content: "";
+  position: absolute;
+  top: -20%;
+  bottom: -20%;
+  left: -30%;
+  z-index: 0;
+  width: 45%;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.09) 50%,
+    transparent 100%
+  );
+  transform: skewX(-18deg) translateX(-120%);
+}
+
+@keyframes shine-sweep {
+  from {
+    transform: skewX(-18deg) translateX(-120%);
+  }
+  to {
+    transform: skewX(-18deg) translateX(560%);
+  }
+}
+
+.spotlight-card:hover::after {
+  opacity: 1;
+  animation: shine-sweep 0.8s ease forwards;
+}
+
+/* Focus-dimming: неактивные карточки приглушаются при наведении на сетку. */
+.cards a {
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.cards:has(a:hover) a:not(:hover) {
+  opacity: 0.55;
+}
+
+/* Ambient-орбы фона: два фиксированных radial-градиента, медленный дрейф. */
+@keyframes orb-drift-a {
+  from {
+    transform: translate3d(-4%, -2%, 0) scale(1);
+  }
+  to {
+    transform: translate3d(4%, 3%, 0) scale(1.08);
+  }
+}
+
+@keyframes orb-drift-b {
+  from {
+    transform: translate3d(3%, 2%, 0) scale(1.05);
+  }
+  to {
+    transform: translate3d(-3%, -3%, 0) scale(1);
+  }
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+body::before {
+  background: radial-gradient(
+    560px circle at 18% 12%,
+    rgba(52, 211, 153, 0.07),
+    transparent 70%
+  );
+  animation: orb-drift-a 12s ease-in-out infinite alternate;
+}
+
+body::after {
+  background: radial-gradient(
+    640px circle at 85% 88%,
+    rgba(45, 212, 191, 0.07),
+    transparent 70%
+  );
+  animation: orb-drift-b 12s ease-in-out infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise-in {
+    animation: none;
+  }
+  .spotlight-card::before {
+    display: none;
+  }
+  .spotlight-card::after {
+    display: none;
+  }
+  .whoami-badge,
+  .whoami-cursor,
+  .whoami-out-caret,
+  body::before,
+  body::after {
+    animation: none;
+  }
+  .whoami-out {
+    transition: none;
+  }
+  body::before,
+  body::after {
+    display: none;
+  }
+  .cards:has(a:hover) a:not(:hover) {
+    opacity: 1;
+  }
+}
